@@ -101,35 +101,30 @@
       const isAndroid = /Android/i.test(userAgent);
       const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
       const isInApp = /FBAN|FBAV|Instagram|Line|Twitter|TikTok/i.test(userAgent);
-      const isDesktop = !isIOS && !isAndroid;
+      const isMobile = isAndroid || isIOS;
       if (isInApp) {
         alert("Please open this page in your browser (Chrome or Safari) to chat on WhatsApp.");
         return;
       }
 
-      // const whatsappLink = isAndroid
-      //   ? `intent://send?phone=${phone}&text=${message}#Intent;scheme=whatsapp;package=com.whatsapp;action=android.intent.action.VIEW;end;`
-      //   : isIOS
-      //   ? `https://wa.me/${phone}?text=${message}`
-      //   : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`;
+    const deepLink = whatsapp://send?phone=${phone}&text=${message};
+    const fallbackLink = isMobile
+      ? `https://wa.me/${phone}?text=${message}`
+      : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`;
 
-      const deepLink = `whatsapp://send?phone=${phone}&text=${message}`;
-    const webLink = isDesktop
-      ? `https://web.whatsapp.com/send?phone=${phone}&text=${message}`
-      : `https://wa.me/${phone}?text=${message}`;
+    if (isMobile) {
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = deepLink;
+      document.body.appendChild(iframe);
 
-    const link = document.createElement('a');
-    link.href = deepLink;
-    link.style.display = 'none';
-    document.body.appendChild(link);
-
-    // Try to open WhatsApp app directly
-    link.click();
-
-    // Fallback after 1.5 seconds if it didn't open
-    setTimeout(() => {
-      window.location.href = webLink;
-    }, 1500);
+      setTimeout(() => {
+        window.location.href = fallbackLink;
+      }, 2000);
+    } else {
+      window.location.href = fallbackLink;
+    }
+}
   </script>
 
 </body>
