@@ -118,12 +118,18 @@
       ? `https://web.whatsapp.com/send?phone=${phone}&text=${message}`
       : `https://wa.me/${phone}?text=${message}`;
 
-    window.location.href = deepLink;
+    const link = document.createElement('a');
+    link.href = deepLink;
+    link.style.display = 'none';
+    document.body.appendChild(link);
 
+    // Try to open WhatsApp app directly
+    link.click();
+
+    // Fallback after 1.5 seconds if it didn't open
     setTimeout(() => {
       window.location.href = webLink;
-    }, 2000);
-    }
+    }, 1500);
   </script>
 
 </body>
