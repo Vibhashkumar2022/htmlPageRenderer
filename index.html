@@ -107,7 +107,7 @@
         return;
       }
 
-    const deepLink = whatsapp://send?phone=${phone}&text=${message};
+    const deepLink = `whatsapp://send?phone=${phone}&text=${message}`;
     const fallbackLink = isMobile
       ? `https://wa.me/${phone}?text=${message}`
       : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`;
