@@ -107,11 +107,14 @@
         return;
       }
 
-      const whatsappLink = isAndroid
-        ? `intent://send?phone=${phone}&text=${message}#Intent;scheme=whatsapp;package=com.whatsapp;action=android.intent.action.VIEW;end;`
-        : isIOS
-        ? `https://wa.me/${phone}?text=${message}`
-        : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`;
+      // const whatsappLink = isAndroid
+      //   ? `intent://send?phone=${phone}&text=${message}#Intent;scheme=whatsapp;package=com.whatsapp;action=android.intent.action.VIEW;end;`
+      //   : isIOS
+      //   ? `https://wa.me/${phone}?text=${message}`
+      //   : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`;
+
+       // Universal URL that works on Android, iOS, Desktop
+  const whatsappLink = `https://wa.me/${phone}?text=${message}`;
 
       window.location.href = whatsappLink;
     }
