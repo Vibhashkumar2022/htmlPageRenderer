@@ -101,7 +101,7 @@
       const isAndroid = /Android/i.test(userAgent);
       const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
       const isInApp = /FBAN|FBAV|Instagram|Line|Twitter|TikTok/i.test(userAgent);
-
+      const isDesktop = !isIOS && !isAndroid;
       if (isInApp) {
         alert("Please open this page in your browser (Chrome or Safari) to chat on WhatsApp.");
         return;
@@ -113,10 +113,16 @@
       //   ? `https://wa.me/${phone}?text=${message}`
       //   : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`;
 
-       // Universal URL that works on Android, iOS, Desktop
-  const whatsappLink = `https://wa.me/${phone}?text=${message}`;
+       const deepLink = whatsapp://send?phone=${phone}&text=${message};
+    const webLink = isDesktop
+      ? `https://web.whatsapp.com/send?phone=${phone}&text=${message}`
+      : `https://wa.me/${phone}?text=${message}`;
 
-      window.location.href = whatsappLink;
+    window.location.href = deepLink;
+
+    setTimeout(() => {
+      window.location.href = webLink;
+    }, 2000);
     }
   </script>
 
