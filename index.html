@@ -91,26 +91,43 @@
   <button id="whatsapp-btn" onclick="openWhatsApp()">
     <img src="https://pictr.com/images/2025/01/17/xpg4vu.png" alt="Chat on WhatsApp"/>
   </button>
+<script>
+  function openWhatsApp() {
+    const phone = '60395493792';
+    const message = encodeURIComponent('Hi, I need help on sooka');
+    const userAgent = navigator.userAgent || navigator.vendor;
 
-   <script>
-    function openWhatsApp() {
-      const phone = '60395493792';
-      const message = encodeURIComponent('Hi, I need help on sooka');
-      const userAgent = navigator.userAgent || navigator.vendor;
+    const isAndroid = /Android/i.test(userAgent);
+    const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
+    const isInApp = /FBAN|FBAV|Instagram|Line|Twitter|TikTok/i.test(userAgent);
+    const isMobile = isIOS || isAndroid
 
-      const isAndroid = /Android/i.test(userAgent);
-      const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
-      const isInApp = /FBAN|FBAV|Instagram|Line|Twitter|TikTok/i.test(userAgent);
-      const isMobile = isAndroid || isIOS;
-      if (isInApp) {
-        alert("Please open this page in your browser (Chrome or Safari) to chat on WhatsApp.");
-        return;
-      }
+    if (isInApp) {
+      alert("Please open this page in your browser (Chrome or Safari) to chat on WhatsApp.");
+      return;
+    }
 
-    const deepLink = `https://wa.me/${phone}?text=${message}`;
-    window.open(deepLink);
+   
+      isAndroid
+      ? intent://send?phone=${phone}&text=${message}#Intent;scheme=whatsapp;package=com.whatsapp;action=android.intent.action.VIEW;end;
+      : isIOS
+      ? `https://wa.me/${phone}?text=${message}`
+      : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`;
+if (isMobile) {
+   const whatsappLink = `https://wa.me/${phone}?text=${message}`;
+  if (isIOS) {
+     window.location.href = whatsappLink;
+  } else {
+     window.open(whatsappLink);
+  }
+} else {
+ const whatsappLink = `https://web.whatsapp.com/send?phone=${phone}&text=${message}`
+ window.location.href = whatsappLink;
 }
-  </script>
+    
+  }
+</script>
+  
 
 </body>
 </html>'
