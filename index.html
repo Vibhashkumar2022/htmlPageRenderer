@@ -107,12 +107,6 @@
       return;
     }
 
-   
-      isAndroid
-      ? intent://send?phone=${phone}&text=${message}#Intent;scheme=whatsapp;package=com.whatsapp;action=android.intent.action.VIEW;end;
-      : isIOS
-      ? `https://wa.me/${phone}?text=${message}`
-      : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`;
 if (isMobile) {
    const whatsappLink = `https://wa.me/${phone}?text=${message}`;
   if (isIOS) {
