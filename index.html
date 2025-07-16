@@ -107,7 +107,7 @@
       alert("Please open this page in your browser (Chrome or Safari) to chat on WhatsApp.");
       return;
     }
-if (isAndroid) {
+if (isMobile) {
   const whatsappLink = `https://wa.me/${phone}?text=${message}`
   window.open(whatsappLink);
 }else {   
