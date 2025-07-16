@@ -107,23 +107,25 @@
         return;
       }
 
-    const deepLink = `whatsapp://send?phone=${phone}&text=${message}`;
-    const fallbackLink = isMobile
-      ? `https://wa.me/${phone}?text=${message}`
-      : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`;
+    const deepLink = `https://wa.me/${phone}?text=${message}`;
+    // const fallbackLink = isMobile
+    //   ? `https://wa.me/${phone}?text=${message}`
+    //   : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`;
 
-    if (isMobile) {
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.src = deepLink;
-      document.body.appendChild(iframe);
+      
+    // if (isMobile) {
+    //   const iframe = document.createElement('iframe');
+    //   iframe.style.display = 'none';
+    //   iframe.src = deepLink;
+    //   document.body.appendChild(iframe);
 
-      setTimeout(() => {
-        window.location.href = fallbackLink;
-      }, 2000);
-    } else {
-      window.location.href = fallbackLink;
-    }
+    //   setTimeout(() => {
+    //     window.location.href = fallbackLink;
+    //   }, 2000);
+    // } else {
+    //   window.location.href = fallbackLink;
+    // }
+      window.open(deepLink);
 }
   </script>
 
