@@ -107,17 +107,15 @@
       alert("Please open this page in your browser (Chrome or Safari) to chat on WhatsApp.");
       return;
     }
+if (isAndroid) {
+  const whatsappLink = `https://wa.me/${phone}?text=${message}`
+  window.open(whatsappLink);
+}else {   
+    const whatsappLink = isIOS
+      ? `https://wa.me/${phone}?text=${message}`
+      : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`;
 
-if (isMobile) {
-   const whatsappLink = `https://wa.me/${phone}?text=${message}`;
-  if (isIOS) {
-     window.location.href = whatsappLink;
-  } else {
-     window.open(whatsappLink);
-  }
-} else {
- const whatsappLink = `https://web.whatsapp.com/send?phone=${phone}&text=${message}`
- window.location.href = whatsappLink;
+    window.location.href = whatsappLink;
 }
     
   }
